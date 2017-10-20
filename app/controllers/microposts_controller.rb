@@ -21,6 +21,18 @@ class MicropostsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
   
+  def favoritings
+    @user = User.find(params[:id])
+    @favoritings = @user.favoritings.page(params[:page])
+    counts(@user)
+  end
+  
+  def favorites
+    @user = User.find(params[:id])
+    @favorites = @user.favorites.page(params[:page])
+    counts(@user)
+  end
+  
   private
 
   def micropost_params

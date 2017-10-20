@@ -38,9 +38,15 @@ class UsersController < ApplicationController
     counts(@user)
   end
   
+  def favorites
+    @user = User.find(params[:id])
+    @favorites = @user.favoritings.page(params[:page])
+    counts(@user)
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, )
   end
 end
